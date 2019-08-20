@@ -2,12 +2,12 @@
 
 When you run Pathom in Clojure with the parallel connect, the resolver functions are
 running inside core.async `go` blocks. In case of CLJS most IO is done async, making
-this a non-issue, but if you are on Java environment and doing blocking IO, this means
-the code is doing IO on `go` blocks, which is a no no.
+this a non-issue, but if you are on the JVM and doing blocking IO, this means
+the code is doing IO on `go` blocks, which is a no-no.
 
-If you can switch to some library that does async IO that's the best option, but if you
-can't or wont now, Pathom provides a thread pool helper so you can tell the engine to
-run the resolvers there to avoid blocking the `go` blocks.
+The best option is to switch to some library that performs async IO, but if you
+can't or won't, Pathom provides a thread pool constructor and an option to inform 
+the engine to run the resolvers on a thread pool to avoid blocking the `go` blocks.
 
 Here is an example of how to setup a thread pool (clj only!):
 
